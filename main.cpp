@@ -105,6 +105,35 @@ void Render()
 	MyRect.h = rand() % 480;
 	SDL_RenderFillRect(MyRenderer, &MyRect);
 
+	//원그리기
+	int X1 = 0;
+	int Y1 = 0;
+	int X2 = 0;
+	int Y2 = 0;
+	int CenterOfCircleX = rand() % 640;
+	int CenterOfCircleY = rand() % 480;
+	int Radius = rand() % 100 + 10;
+	//int CenterOfCircleX = 320;
+	//int CenterOfCircleY = 240;
+	//int Radius = 110;
+	
+	for (int Size = 0; Size < Radius; ++Size)
+	{
+		for (int Angle = 0; Angle < 360; Angle++)
+		{
+			X1 = static_cast<int>(SDL_sin(3.14f * 180 * Angle) * Size);
+			Y1 = static_cast<int>(SDL_cos(3.14f * 180 * Angle) * Size);
+			X2 = static_cast<int>(SDL_sin(3.14f * 180 * Angle + 1) * Size);
+			Y2 = static_cast<int>(SDL_cos(3.14f * 180 * Angle + 1) * Size);
+			//SDL_RenderDrawPoint(MyRenderer, X + CenterOfCircleX, Y + CenterOfCircleY);
+			SDL_RenderDrawLine(MyRenderer, 
+				X1 + CenterOfCircleX, 
+				Y1 + CenterOfCircleY, 
+				X2 + CenterOfCircleX, 
+				Y2 + CenterOfCircleY);
+		}
+	}
+
 	SDL_RenderPresent(MyRenderer);
 }
 
